@@ -73,13 +73,14 @@ module.exports.createFunction = (aether) ->
     messWithLoops = true
 
   unless aether.esperEngine
-    aether.esperEngine = new esper.Engine
+    aether.esperEngine = new esper.Engine({
       strict: aether.language.id not in ['python', 'lua']
       foreignObjectMode: if aether.options.protectAPI then 'smart' else 'link'
       extraErrorInfo: true
       yieldPower: 2
       debug: aether.options.debug
       #language: aether.language.id  # TODO: set the language in Esper to let Esper use native language code
+    })
 
   engine = aether.esperEngine
   #console.log JSON.stringify(aether.ast, null, '  ')
@@ -169,6 +170,7 @@ makeYieldFilter = (aether) -> (engine, evaluator, e) ->
   return false
 
 module.exports.createThread = (aether, fx) ->
+  esper = window?.esper ? self?.esper ? global?.esper ? require 'esper.js'
   internalFx = esper.Value.getBookmark fx
   engine = aether.esperEngine.fork()
   upgradeEvaluator aether, engine.evaluator

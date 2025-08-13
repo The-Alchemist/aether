@@ -159,6 +159,9 @@ module.exports = class Aether
   createThread: (fx) ->
     interpreter.createThread @, fx
 
+  sandboxGenerator: (generator) ->
+    interpreter.createThread @, generator
+
   updateProblemContext: (problemContext) ->
     @options.problemContext = problemContext
 

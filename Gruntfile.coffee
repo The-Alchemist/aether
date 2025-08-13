@@ -14,11 +14,13 @@ module.exports = (grunt) ->
       parsers:
         files: [
           {src: 'build/python.js', dest: 'build/python.min.js'}
+          {src: 'build/clojure.js', dest: 'build/clojure.min.js'}
           {src: 'build/lua.js', dest: 'build/lua.min.js'}
           {src: 'build/coffeescript.js', dest: 'build/coffeescript.min.js'}
           {src: 'build/javascript.js', dest: 'build/javascript.min.js'}
           {src: 'build/java.js', dest: 'build/java.min.js'}
           {src: 'build/html.js', dest: 'build/html.min.js'}
+          {src: 'build/esper.js', dest: 'build/esper.min.js'}
         ]
 
     coffeelint:
@@ -40,7 +42,7 @@ module.exports = (grunt) ->
         spawn: true
         interrupt: true
         atBegin: true
-        livereload: true
+        livereload: false
 
     #jasmine:
     #  aetherTests:
@@ -85,16 +87,22 @@ module.exports = (grunt) ->
           ignore: ['lodash', 'filbert',
             'filbert/filbert_loose', 'lua2js',
             'coffee-script-redux', 'jshint', 'cashew-js',
-            'esper.js', 'deku', 'htmlparser2']
+            'deku', 'htmlparser2']
       parsers:
         files: [
           {src: 'parsers/python.js', dest: 'build/python.js'}
+          {src: 'parsers/clojure.js', dest: 'build/clojure.js'}
           {src: 'parsers/lua.js', dest: 'build/lua.js'}
           {src: 'parsers/coffeescript.js', dest: 'build/coffeescript.js'}
           {src: 'parsers/javascript.js', dest: 'build/javascript.js'}
           {src: 'parsers/java.js', dest: 'build/java.js'}
           {src: 'parsers/html.js', dest: 'build/html.js'}
+          {src: 'parsers/esper.js', dest: 'build/esper.js'}
         ]
+        options:
+          browserifyOptions:
+            debug: false
+            # This allows ES6 syntax to pass through
       # We're not using jasmine but now jasmine_node,
       # so we don't need to browserify the tests
       #test:
