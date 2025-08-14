@@ -67,12 +67,6 @@ module.exports = (grunt) ->
             src: ['**/*.coffee'] # Actual pattern(s) to match.
             dest: 'lib/'         # Destination path prefix.
             ext: '.js'           # Dest filepaths will have this extension.
-          ,
-            expand: true         # Enable dynamic expansion.
-            cwd: 'test/'         # Src matches are relative to this path.
-            src: ['**/*.coffee'] # Actual pattern(s) to match.
-            dest: 'lib/test/'    # Destination path prefix.
-            ext: '.js'           # Dest filepaths will have this extension.
           ]
       dev:
         files:
@@ -87,7 +81,7 @@ module.exports = (grunt) ->
           ignore: ['lodash', 'filbert',
             'filbert/filbert_loose', 'lua2js',
             'coffee-script-redux', 'jshint', 'cashew-js',
-            'deku', 'htmlparser2']
+            'deku', 'htmlparser2', 'closer']
       parsers:
         files: [
           {src: 'parsers/python.js', dest: 'build/python.js'}
@@ -198,13 +192,13 @@ module.exports = (grunt) ->
 
   # Default task(s).
   grunt.registerTask 'default', ['coffeelint', 'coffee', 'browserify',
-    'string-replace', 'copy:jstests', 'jasmine_node:run', 'jade', 'sass'] #, 'uglify']
+    'string-replace', 'copy:jstests', 'jasmine_node:run', 'jade']#, 'sass', 'uglify']
   grunt.registerTask 'travis', ['coffeelint', 'coffee', 'copy:jstests', 'jasmine_node:run']
   grunt.registerTask 'test', ['newer:coffee', 'copy:jstests', 'jasmine_node:run']
   grunt.registerTask 'coverage', ['coffee', 'instrument', 'copy:tests',
     'jasmine_node:runCoverage', 'storeCoverage', 'makeReport']
   grunt.registerTask 'build', ['coffeelint', 'coffee', 'browserify:src',
-    'string-replace', 'jade', 'sass', 'uglify:build']
+    'string-replace', 'jade']
   grunt.registerTask 'parsers', ['browserify:parsers', 'uglify:parsers']
 
   # Run a single test with `grunt spec:filename`.
