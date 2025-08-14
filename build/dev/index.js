@@ -287,6 +287,10 @@
       code: 'function fib(n) {\n  return n < 2 ? n : fib(n - 1) + fib(n - 2);\n}\nvar chupacabra = fib(Math.ceil(Math.random() * 5))\nthis.say("I want", chupacabra, "gold.");\nreturn chupacabra;',
       aether: 'var thisValue = {say: console.log};\nvar aetherOptions = {\n  executionLimit: 1000,\n  problems: {jshint_W040: {level: "ignore"}}\n};\nvar aether = new Aether(aetherOptions);\nvar code = grabDemoCode();\naether.transpile(code);\nvar method = aether.createMethod(thisValue);\naether.run(method);\naether.run(method);\naether.run(method);\ndemoShowOutput(aether);'
     }, {
+      name: "Basic Clojure",
+      code: '(.sayItLoud this "Hi")',
+      aether: 'var thisValue = {\n    sayItLoud: function (s) { console.log(s + \'!\');}\n};\nvar aetherOptions = {\n  executionLimit: 1000,\n  problems: {jshint_W040: {level: "ignore"}},\n  language: \'clojure\'\n};\nvar aether = new Aether(aetherOptions);\nvar code = grabDemoCode();\naether.transpile(code);\nvar method = aether.createMethod(thisValue);\naether.run(method);\ndemoShowOutput(aether);'
+    }, {
       name: "Basic Python",
       code: 'self.sayItLoud(\'Hi\')',
       aether: 'var thisValue = {\n    sayItLoud: function (s) { console.log(s + \'!\');}\n};\nvar aetherOptions = {\n  executionLimit: 1000,\n  problems: {jshint_W040: {level: "ignore"}},\n  language: \'python\'\n};\nvar aether = new Aether(aetherOptions);\nvar code = grabDemoCode();\naether.transpile(code);\nvar method = aether.createMethod(thisValue);\naether.run(method);\ndemoShowOutput(aether);'
