@@ -1,0 +1,5 @@
+services:
+  aether:
+    build: .
+    stdin_open: true        # Keep STDIN open (-i flag)
+    tty: true              # Allocate a pseudo-TTY (-t flag)
