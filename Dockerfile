@@ -1,10 +1,5 @@
 # Use Node.js 18 LTS - provides good compatibility while being secure and supported
-FROM node:18-alpine
-
-# Install system dependencies including PhantomJS
-RUN apk add --no-cache \
-    git \
-    && rm -rf /var/cache/apk/*
+FROM node:18
 
 # Set working directory
 WORKDIR /app
@@ -21,6 +16,10 @@ RUN npm install grunt-cli jison
 COPY Gruntfile.coffee ./
 # Install dependencies
 RUN npm install
+
+# HACK: fix old version of jasmine-node which uses this.print_ and util.print instead of console.log
+RUN grep --include='*.js' -rl "this\.print_(" node_modules | xargs sed -i 's/this\.print_(/console.log(/g'
+RUN grep --include='*.js' -rl "util\.print("  node_modules | xargs sed -i 's/util\.print(/console.log(/g'
 
 # Copy source code
 COPY bower.json ./

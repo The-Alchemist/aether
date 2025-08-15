@@ -182,7 +182,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-browserify'
   grunt.loadNpmTasks 'grunt-string-replace'
-  grunt.loadNpmTasks 'grunt-notify'
   grunt.loadNpmTasks 'grunt-gh-pages'
   grunt.loadNpmTasks 'grunt-push-release'
   grunt.loadNpmTasks 'grunt-contrib-jade'
