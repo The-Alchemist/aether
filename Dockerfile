@@ -16,10 +16,6 @@ COPY Gruntfile.coffee ./
 # Install dependencies
 RUN npm install
 
-# HACK: fix old version of jasmine-node which uses this.print_ and util.print instead of console.log
-RUN grep --include='*.js' -rl "this\.print_(" node_modules | xargs sed -i 's/this\.print_(/console.log(/g'
-RUN grep --include='*.js' -rl "util\.print("  node_modules | xargs sed -i 's/util\.print(/console.log(/g'
-
 # Copy source code
 
 COPY rt.coffee ./
