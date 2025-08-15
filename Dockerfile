@@ -22,7 +22,7 @@ RUN grep --include='*.js' -rl "this\.print_(" node_modules | xargs sed -i 's/thi
 RUN grep --include='*.js' -rl "util\.print("  node_modules | xargs sed -i 's/util\.print(/console.log(/g'
 
 # Copy source code
-COPY bower.json ./
+
 COPY rt.coffee ./
 COPY sc.coffee ./
 COPY src/ ./src/

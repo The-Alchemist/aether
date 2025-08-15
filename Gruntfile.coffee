@@ -119,7 +119,7 @@ module.exports = (grunt) ->
 
     push:
       options:
-        files: ['package.json', 'bower.json']
+        files: ['package.json']
         updateConfigs: ['pkg']
         commitMessage: 'Release %VERSION%'
         commitFiles: ['-a']
