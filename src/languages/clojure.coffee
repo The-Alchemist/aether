@@ -1,7 +1,9 @@
 Language = require './language'
 
+closer = require('closer')
+
 callParser = (code, aether, loose) ->
-  closer = require 'closer'
+
   ast = closer.parse code,
     loc: true
     range: true

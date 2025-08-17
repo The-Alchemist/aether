@@ -1,1 +1,1 @@
-window.aetherCloser = require('closer');
+window.closer = require('closer');
