@@ -21,7 +21,6 @@ RUN npm install
 COPY rt.coffee ./
 COPY sc.coffee ./
 COPY src/ ./src/
-COPY parsers/ ./parsers/
 
 # Build the project (CoffeeScript will now be available)
 RUN grunt build

@@ -65,7 +65,7 @@ module.exports = (grunt) ->
             expand: true         # Enable dynamic expansion.
             cwd: 'src/'          # Src matches are relative to this path.
             src: ['**/*.coffee'] # Actual pattern(s) to match.
-            dest: 'lib/'         # Destination path prefix.
+            dest: 'build/'         # Destination path prefix.
             ext: '.js'           # Dest filepaths will have this extension.
           ]
       dev:
@@ -74,8 +74,8 @@ module.exports = (grunt) ->
 
     browserify:
       src:
-        src: ['lib/<%= pkg.name %>.js']
-        dest: 'build/<%= pkg.name %>.js'
+        src: ['src/lib/<%= pkg.name %>.js']
+        dest: 'build/lib/<%= pkg.name %>.js'
         options:
           #standalone: "Aether"  # can't figure out how to get this to work
           ignore: ['lodash', 'filbert',
@@ -84,19 +84,15 @@ module.exports = (grunt) ->
             'deku', 'htmlparser2', 'closer']
       parsers:
         files: [
-          {src: 'parsers/python.js', dest: 'build/python.js'}
-          {src: 'parsers/clojure.js', dest: 'build/clojure.js'}
-          {src: 'parsers/lua.js', dest: 'build/lua.js'}
-          {src: 'parsers/coffeescript.js', dest: 'build/coffeescript.js'}
-          {src: 'parsers/javascript.js', dest: 'build/javascript.js'}
-          {src: 'parsers/java.js', dest: 'build/java.js'}
-          {src: 'parsers/html.js', dest: 'build/html.js'}
-          {src: 'parsers/esper.js', dest: 'build/esper.js'}
+          {src: 'src/parsers/python.js', dest: 'build/parsers/python.js'}
+          {src: 'src/parsers/clojure.js', dest: 'build/parsers/clojure.js'}
+          {src: 'src/parsers/lua.js', dest: 'build/parsers/lua.js'}
+          {src: 'src/parsers/coffeescript.js', dest: 'build/parsers/coffeescript.js'}
+          {src: 'src/parsers/javascript.js', dest: 'build/parsers/javascript.js'}
+          {src: 'src/parsers/java.js', dest: 'build/parsers/java.js'}
+          {src: 'src/parsers/html.js', dest: 'build/parsers/html.js'}
+          {src: 'src/parsers/esper.js', dest: 'build/parsers/esper.js'}
         ]
-        options:
-          browserifyOptions:
-            debug: false
-            # This allows ES6 syntax to pass through
       # We're not using jasmine but now jasmine_node,
       # so we don't need to browserify the tests
       #test:
@@ -197,7 +193,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'coverage', ['coffee', 'instrument', 'copy:tests',
     'jasmine_node:runCoverage', 'storeCoverage', 'makeReport']
   grunt.registerTask 'build', ['coffeelint', 'coffee', 'browserify:src',
-    'string-replace', 'jade']
+    'string-replace', 'jade', 'uglify:build']
   grunt.registerTask 'parsers', ['browserify:parsers', 'uglify:parsers']
 
   # Run a single test with `grunt spec:filename`.
