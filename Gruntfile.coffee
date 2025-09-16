@@ -156,6 +156,11 @@ module.exports = (grunt) ->
         flatten: true
         src: "lib/test/**/*"
         dest: "coverage/instrument/lib/test/"
+      parsers:
+        files: [
+          {src: 'build/parsers/clojure.js', dest: 'build/clojure.js'}
+          {src: 'build/parsers/esper.js', dest: 'build/esper.js'}
+        ]
 
     storeCoverage:
       options:
@@ -193,7 +198,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'coverage', ['coffee', 'instrument', 'copy:tests',
     'jasmine_node:runCoverage', 'storeCoverage', 'makeReport']
   grunt.registerTask 'build', ['coffeelint', 'coffee', 'browserify:src',
-    'string-replace', 'jade', 'uglify:build']
+    'string-replace', 'browserify:parsers', 'copy:parsers', 'jade', 'uglify:build']
   grunt.registerTask 'parsers', ['browserify:parsers', 'uglify:parsers']
 
   # Run a single test with `grunt spec:filename`.
