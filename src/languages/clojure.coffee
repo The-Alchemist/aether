@@ -54,3 +54,8 @@ module.exports = class Clojure extends Language
 
   parseDammit: (code, aether) ->
     callParser code, aether, true
+
+  setupInterpreter: (esper) ->
+    # Set up global variables that the closer library expects
+    esper.addGlobal 'closerCore', closer.core
+    esper.addGlobal 'closerAssertions', closer.assertions

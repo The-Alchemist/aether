@@ -74,14 +74,14 @@ module.exports = (grunt) ->
 
     browserify:
       src:
-        src: ['src/lib/<%= pkg.name %>.js']
+        src: ['build/<%= pkg.name %>.js']
         dest: 'build/lib/<%= pkg.name %>.js'
         options:
           #standalone: "Aether"  # can't figure out how to get this to work
           ignore: ['lodash', 'filbert',
             'filbert/filbert_loose', 'lua2js',
             'coffee-script-redux', 'jshint', 'cashew-js',
-            'deku', 'htmlparser2', 'closer']
+            'deku', 'htmlparser2']
       parsers:
         files: [
           {src: 'src/parsers/python.js', dest: 'build/parsers/python.js'}
